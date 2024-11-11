@@ -1,0 +1,65 @@
+<header class="mb-4">
+    <nav class="px-2 md:px-6 lg:px-10 md:py-2">
+      <div class="flex justify-between items-center pt-2 md:pt-0">
+          <a routerLink="/" class="flex flex-col items-center cursor-pointer">
+            <img src="https://www.pngkey.com/png/detail/361-3617936_b2b-e-commerce-b2b-e-commerce-icon.png" alt="brand" class="w-[40px] md:w-[50px]" />
+            <span class="text-sm font-semibold text-white bg-[#3c64a9] px-3 rounded rotate-6 hidden md:block">
+              BACK 2 BUY
+            </span>
+          </a>
+        
+        <div class="">
+          <ul class="top-nav-menu">
+            <li class="top-nav-menu-item">
+              <a
+                class="mr-4 py-1 flex-col md:flex-row"
+                [routerLink]="['/wishlist']"
+              >
+                <i title="Wishlist" class="fa-regular fa-heart"></i>
+                <span class="md:hidden text-xs">Wishlist</span>
+              </a>
+            </li>
+            <li class="top-nav-menu-item">
+              <a class="relative mr-4 py-1 flex-col md:flex-row" [routerLink]="['/shopping-cart']">
+                <i title="Shopping Cart" class="fa-solid fa-bag-shopping"></i>
+                <span class="md:hidden text-xs">Cart</span>
+                <span 
+                *ngIf="cart.length>0" 
+                class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gray-800 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">
+                  {{cart.length}}
+                </span>
+              </a>
+            </li>
+            <li class="top-nav-menu-item" *ngIf="!authService.isLoggedIn()">
+              <a class="py-1 flex-col md:flex-row" [routerLink]="['/auth/login']">
+                <i title="Login" class="fa-regular fa-user"></i>
+                <span class="md:hidden text-xs">Login</span>
+              </a>
+            </li>
+            <li class="top-nav-menu-item" *ngIf="authService.isLoggedIn()">
+              <button class="py-1 flex-col md:flex-row" (click)="logOut()">
+                <i title="Logout" class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span class="text-xs">Logout</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 border-b border-gray-300 hidden md:block">
+        <ul class="bottom-nav-menu text-md uppercase">
+          <li class="bottom-nav-menu-item" *ngFor="let menu of menulist">
+            <a
+              class="px-2 py-1 transition-all duration-900"
+              [routerLink]="[menu.path]"
+              [routerLinkActive]="['active-link']"
+              [attr.aria-label]="menu.title+' '+'link'"
+            >
+            {{menu.title}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>  
+  
+  </header>
+  
